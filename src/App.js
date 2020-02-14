@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { TodoBanner } from "./TodoBanner";
+import { TodoCreator } from "./TodoCreator";
+import { TodoRow }  from "./TodoRow";
 //import logo from './logo.svg';
 //import './App.css';
 
@@ -13,7 +16,7 @@ export default class App extends Component {
                    {action: "Reduce the level of un-re-usable methods", done: false},
                   {action: "Ensure you take your coffee", done: false},
                 {action: "Wash Clothes", done : false}],
-                nextItem: ""
+             //   nextItem: ""
     }
   }
 
@@ -43,20 +46,22 @@ export default class App extends Component {
       ? {...item, done: !item.done } : item)});
 
       todoTableRows = () => this.state.todoItems.map(item =>
-        <tr key={ item.action }>
-          <td>{ item.action }</td>
-          <td>
-            <input type="checkbox" checked={ item.done }
-              onChange={  () => this.toggleTodo(item)} />
-          </td>
-        </tr>);
+        <TodoRow key = { item.action } item={ item } callback={this.toggleTodo } />)
+        // <tr key={ item.action }>
+        //   <td>{ item.action }</td>
+        //   <td>
+        //     <input type="checkbox" checked={ item.done }
+        //       onChange={  () => this.toggleTodo(item)} />
+        //   </td>
+        // </tr>);
   render() {
-    return (
+    
       <div>
-        <h1 className = "bg-primary text-white text-center p-1">
-          {this.state.userName}'s To Do LIST
-          ({ this.state.todoItems.filter(t => !t.done).length} items to do)
-        </h1>
+      <TodoBanner name={ this.state.userName } tasks= {this.state.todoItems} />
+        {/* <h1 className = "bg-primary text-white text-center p-1"> */}
+          {/* {this.state.userName}'s To Do LIST */}
+          {/* ({ this.state.todoItems.filter(t => !t.done).length} items to do) */}
+        {/* </h1> */}
         {/* <button className="btn btn-primary m-2"
         onClick={ this.changeStateData }>
           flip it
@@ -77,6 +82,6 @@ export default class App extends Component {
           </table>
         </div>
       </div>
-    )
+    
   }
 }
