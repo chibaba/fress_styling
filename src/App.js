@@ -21,8 +21,9 @@ export default class App extends Component {
      this.setState({ newItemText: event.target.value });
    }
    createNewTodo = () => {
-     If(!this.state.todoItems
-          .find(item => item.action === this.state.newItemText)) {
+     if (!this.state.todoItems
+      .find(item => item.action === this.state.newItemText))
+           {
             this.setState({
               todoItems: [...this.state.todoItems,
               { action: this.state.newItemText, done: false }],
@@ -36,6 +37,19 @@ export default class App extends Component {
   //     userName: this.state.userName === "Senior" ? "Developer" : "Senior"
   //   })
  // }
+
+    toggleTodo = (todo) => this.setState({ todoItems:
+     this.state.todoItems.map(item => item.action === todo.action
+      ? {...item, done: !item.done } : item)});
+
+      todoTableRows = () => this.state.todoItems.map(item =>
+        <tr key={ item.action }>
+          <td>{ item.action }</td>
+          <td>
+            <input type="checkbox" checked={ item.done }
+              onChange={  () => this.toggleTodo(item)} />
+          </td>
+        </tr>);
   render() {
     return (
       <div>
