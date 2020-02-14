@@ -69,6 +69,12 @@ export default class App extends Component {
             <button className="btn btn-primary mt-1"
             onClick={ this.createNewTodo}>Add</button>
           </div>
+          <table className="table table-stripped table-bordered">
+            <thead>
+              <tr><th>Description</th><th>Done</th></tr>
+            </thead>
+            <tbody>{ this.todoTableRows() }</tbody>
+          </table>
         </div>
       </div>
     )
